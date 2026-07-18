@@ -1,0 +1,11 @@
+langchain
+langchain-postgres==0.0.x
+pgvector==0.2.x
+sentence-transformers==3.0.x
+ragas==0.1.x
+deepeval==1.x
+fastapi==0.115.x
+uvicorn==0.30.x
+pypdf==4.x
+python-dotenv==1.0.x
+pytest==8.x
