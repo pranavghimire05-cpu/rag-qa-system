@@ -10,10 +10,15 @@ class Config:
     MISTRAL_API_KEY: str = os.getenv("MISTRAL_API_KEY")
     EMBEDDING_MODEL: str = "mistral-embed"
     LLM_MODEL: str = "mistral-small-latest"
+
     
     # Database
-    CHROMA_PERSIST_DIR: str = "./chroma_db"
-    CHROMA_COLLECTION_NAME: str = "enterprise_docs"
+    CHROMA_API_KEY: str = os.getenv("CHROMA_API_KEY")
+    CHROMA_TENANT: str = os.getenv("CHROMA_TENANT")
+    CHROMA_DATABASE : str = os.getenv("CHROMA_DATABASE")
+
+    SUPABASE_URL = os.getenv("SUPABASE_URL")
+    SUPABASE_KEY = os.getenv("SUPABASE_KEY")  # Use the 'anon public' key here
     
     # Chunking
     CHUNK_SIZE: int = 512
