@@ -1,4 +1,3 @@
-import React from "react";
 import { FileText, BookOpen, Maximize2 } from "lucide-react";
 
 export function DocumentViewerSidebar({ 

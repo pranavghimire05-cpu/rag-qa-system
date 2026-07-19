@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
-import { Search, Sparkles, BookOpen, Loader2, ArrowRight, X, FileText, CheckCircle, AlertCircle, Quote, ExternalLink, ZoomIn, ZoomOut, RotateCcw } from "lucide-react"
-import { askQuestion, uploadDocument } from "../lib/api"
+import { Sparkles, BookOpen, Loader2, FileText, Quote, ExternalLink, ZoomIn, ZoomOut, RotateCcw } from "lucide-react"
+import { askQuestion} from "../lib/api"
 import { useApi } from "../lib/useApi"
 
 function FormattedAnswer({ text, sources = [], onRefSelect }) {
@@ -72,21 +72,16 @@ export function ChatPanel({
   setMessages, 
   hasSearched = false, 
   setHasSearched, 
-  selectedFile = null, 
-  setSelectedFile,
   hideHeader = true 
 }) {
   const [input, setInput] = useState("")
-  const [useHybrid, setUseHybrid] = useState(true)
-  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [useHybrid] = useState(true)
+  const [isChatOpen] = useState(false)
   const [focusedSourceIndex, setFocusedSourceIndex] = useState(0)
-  
-  // Track continuous scale parameters for manual page inspection magnification
   const [zoomScale, setZoomScale] = useState(1.0)
   
   const chatInputRef = useRef(null)
   const searchApi = useApi()
-  const uploadApi = useApi()
 
   useEffect(() => {
     if (isChatOpen) {
@@ -94,7 +89,6 @@ export function ChatPanel({
     }
   }, [isChatOpen])
 
-  // Reset zoom settings instantly whenever active target source switches
   useEffect(() => {
     setZoomScale(1.0);
   }, [focusedSourceIndex]);
@@ -227,7 +221,7 @@ export function ChatPanel({
                   {activeFocusedSource ? (
                     <div className="flex flex-col flex-1 min-h-0 justify-between gap-3 h-full">
                       
-                      {/* Viewport Frame Container - set overflow-auto to enable pan scrolling when zoomed */}
+                      {/* Viewport Frame Container */}
                       <div className="relative w-full h-full flex-1 min-h-0 bg-slate-100 rounded-md border border-slate-200 overflow-auto flex items-center justify-center">
                         <img 
                           src={getPdfThumbnailUrl(activeFocusedSource)} 
@@ -235,8 +229,8 @@ export function ChatPanel({
                           style={{ transform: `scale(${zoomScale})`, transformOrigin: 'center center' }}
                           className="w-full h-full object-contain transition-transform duration-200 ease-out"
                           onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80";
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80";
                           }}
                         />
                         
